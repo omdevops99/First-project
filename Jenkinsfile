@@ -9,6 +9,13 @@ pipeline {
             }
         }
 
+        stage('install the dependencies') {
+             steps {
+                sh 'python3 -m pip install -r requirements.txt'
+             }
+        }
+
+
         stage('Run Python Application') {
             steps {
                 sh 'python3 -m pytest application/test_app.py -v'
