@@ -1,26 +1,17 @@
-pipeline {
-    agent any
+stage('Create Virtual Environment') {
+    steps {
+        sh 'python3 -m venv .venv'
+    }
+}
 
-    stages {
+stage('Install Dependencies') {
+    steps {
+        sh '.venv/bin/pip install -r requirements.txt'
+    }
+}
 
-        stage('Checkout') {
-            steps {
-                echo 'Code has been checked out from GitHub'
-            }
-        }
-
-        stage('install the dependencies') {
-             steps {
-                sh 'python3 -m pip install -r requirements.txt'
-             }
-        }
-
-
-        stage('Run Python Application') {
-            steps {
-                sh 'python3 -m pytest application/test_app.py -v'
-            }
-        }
-
+stage('Run Tests') {
+    steps {
+        sh '.venv/bin/python -m pytest application/test_app.py -v'
     }
 }
