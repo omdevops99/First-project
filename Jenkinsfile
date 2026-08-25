@@ -19,10 +19,17 @@ pipeline {
                 sh '.venv/bin/python -m pytest application/test_app.py -v'
             }
         }
+    stage('build the image'){
+           steps {
+            sh 'docker build -t first-project .'
+           }
+    }
 
 }
 
 }
+
+
 
 
 
