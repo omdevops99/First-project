@@ -21,12 +21,12 @@ pipeline {
         }
     stage('build the image'){
            steps {
-            sh 'docker build -t first-project .'
+            sh 'docker build -t first-project:1.0 .'
            }
     }
     stage('create the container'){
            steps {
-            sh 'docker run --name first-project-container first-project:latest'
+            sh 'docker run --name first-project-container first-project:1.0'
            }
     }
 
