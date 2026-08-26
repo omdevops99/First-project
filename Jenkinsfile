@@ -24,6 +24,12 @@ pipeline {
             sh 'docker build -t first-project .'
            }
     }
+    stage('create the container'){
+           steps {
+            sh 'docker run --name first-project-container first-project:latest'
+           }
+    }
+
 
 }
 
