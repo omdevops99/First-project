@@ -24,6 +24,36 @@ pipeline {
             sh 'docker build -t first-project:1.0 .'
            }
     }
+
+    stage('tag the image'){
+           steps {
+            sh 'docker tag  first-project:1.0  omejjigiri/first-project:1.0'
+        
+           }
+    }
+
+    stage('push the docker image') {
+   steps {
+                withCredentials([
+                    usernamePassword(
+                        credentialsId: 'Docker hub cred'
+                        usernameVariable: 'DOCKER_USERNAME',
+                        passwordVariable: 'DOCKER_PASSWORD'
+                    )
+                ])
+                 {
+                    sh '''
+                        echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+                        docker push omejjigiri/first-project:1.0
+                        docker logout
+                    '''
+                }
+
+
+
+    }
+
+        
     stage('create the container'){
            steps {
             // sh 'docker rm -f first-project-container || true'
@@ -33,8 +63,6 @@ pipeline {
 
 
 }
-
-
 
 
 }
