@@ -25,6 +25,7 @@ pipeline {
            }
     }
 
+
     stage('tag the image'){
            steps {
             sh 'docker tag  first-project:1.0  omejjigiri/first-project:1.0'
