@@ -26,7 +26,7 @@ pipeline {
     }
     stage('create the container'){
            steps {
-            sh 'docker rm -f first-project-container || true'
+            // sh 'docker rm -f first-project-container || true'
             sh 'docker run --name first-project-container first-project:1.0'
            }
     }
